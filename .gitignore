@@ -14,3 +14,17 @@
 /Python-2.7.5/PCbuild/Win32-temp-Release/
 /Python-2.7.5/PCbuild/getbuildinfo.o
 /Python-2.7.5/PCbuild/python.bsc
+
+/openssl-1.0.1e/MINFO
+/openssl-1.0.1e/Makefile.bak
+/openssl-1.0.1e/crypto/buildinf.h
+/openssl-1.0.1e/crypto/opensslconf.h.bak
+/openssl-1.0.1e/inc32/
+/openssl-1.0.1e/ms/bcb.mak
+/openssl-1.0.1e/ms/libeay32.def
+/openssl-1.0.1e/ms/nt.mak
+/openssl-1.0.1e/ms/ntdll.mak
+/openssl-1.0.1e/ms/ssleay32.def
+/openssl-1.0.1e/ms/version32.rc
+/openssl-1.0.1e/tmp32/
+/openssl-1.0.1e/tmp32dll/
