@@ -1,2 +1,16 @@
+*.dll
+*.exe
+*.pdb
+*.lib
+*.pyd
+*.exp
+*.pyc
+
 /Python-2.7.5/PCbuild/pcbuild.opensdf
 /Python-2.7.5/PCbuild/pcbuild.sdf
+/Python-2.7.5/PC/python_nt_d.h
+/Python-2.7.5/PC/pythonnt_rc_d.h
+/Python-2.7.5/PCbuild/Win32-temp-Debug/
+/Python-2.7.5/PCbuild/Win32-temp-Release/
+/Python-2.7.5/PCbuild/getbuildinfo.o
+/Python-2.7.5/PCbuild/python.bsc
