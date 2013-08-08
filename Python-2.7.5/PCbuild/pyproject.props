@@ -12,7 +12,7 @@
     <bsddb44DepLibs />
     <sqlite3Dir>$(externalsDir)\sqlite-3.6.21</sqlite3Dir>
     <bz2Dir>$(externalsDir)\bzip2-1.0.6</bz2Dir>
-    <opensslDir>$(externalsDir)\openssl-0.9.8y</opensslDir>
+    <opensslDir>$(externalsDir)\openssl-1.0.1e</opensslDir>
     <tcltkDir>$(externalsDir)\tcltk</tcltkDir>
     <tcltk64Dir>$(externalsDir)\tcltk64</tcltk64Dir>
     <tcltkLib>$(tcltkDir)\lib\tcl85.lib $(tcltkDir)\lib\tk85.lib</tcltkLib>
