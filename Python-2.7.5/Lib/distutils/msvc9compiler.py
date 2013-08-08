@@ -220,7 +220,7 @@ def find_vcvarsall(version):
     """Find the vcvarsall.bat file
 
     At first it tries to find the productdir of VS 2008 in the registry. If
-    that fails it falls back to the VS90COMNTOOLS env var.
+    that fails it falls back to the VS100COMNTOOLS env var.
     """
     vsbase = VS_BASE % version
     try:
@@ -240,7 +240,7 @@ def find_vcvarsall(version):
             log.debug("Unable to find productdir in registry")
 
     if not productdir or not os.path.isdir(productdir):
-        toolskey = "VS%0.f0COMNTOOLS" % version
+        toolskey = "VS100COMNTOOLS" % version
         toolsdir = os.environ.get(toolskey, None)
 
         if toolsdir and os.path.isdir(toolsdir):
@@ -681,6 +681,7 @@ class MSVCCompiler(CCompiler) :
                 build_temp,
                 os.path.basename(output_filename) + ".manifest")
         ld_args.append('/MANIFESTFILE:' + temp_manifest)
+        ld_args.append('/MANIFEST')
 
     def manifest_get_embed_info(self, target_desc, ld_args):
         # If a manifest should be embedded, return a tuple of
