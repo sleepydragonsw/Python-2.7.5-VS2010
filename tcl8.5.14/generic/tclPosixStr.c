@@ -342,7 +342,6 @@ Tcl_ErrnoId(void)
     case EPERM: return "EPERM";
 #endif
 #if defined(EPFNOSUPPORT) && (!defined(ENOLCK) || (ENOLCK != EPFNOSUPPORT))
-    case EPFNOSUPPORT: return "EPFNOSUPPORT";
 #endif
 #ifdef EPIPE
     case EPIPE: return "EPIPE";
@@ -402,7 +401,6 @@ Tcl_ErrnoId(void)
     case ESHUTDOWN: return "ESHUTDOWN";
 #endif
 #ifdef ESOCKTNOSUPPORT
-    case ESOCKTNOSUPPORT: return "ESOCKTNOSUPPORT";
 #endif
 #ifdef ESPIPE
     case ESPIPE: return "ESPIPE";
@@ -790,7 +788,6 @@ Tcl_ErrnoMsg(
     case EPERM: return "not owner";
 #endif
 #if defined(EPFNOSUPPORT) && (!defined(ENOLCK) || (ENOLCK != EPFNOSUPPORT))
-    case EPFNOSUPPORT: return "protocol family not supported";
 #endif
 #ifdef EPIPE
     case EPIPE: return "broken pipe";
@@ -850,7 +847,6 @@ Tcl_ErrnoMsg(
     case ESHUTDOWN: return "can't send after socket shutdown";
 #endif
 #ifdef ESOCKTNOSUPPORT
-    case ESOCKTNOSUPPORT: return "socket type not supported";
 #endif
 #ifdef ESPIPE
     case ESPIPE: return "invalid seek";
