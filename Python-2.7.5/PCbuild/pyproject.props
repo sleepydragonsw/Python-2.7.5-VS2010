@@ -10,7 +10,7 @@
     <bsddbDepLibs>$(bsddb47DepLibs)</bsddbDepLibs>
     <bsddb44Dir>$(externalsDir)\db-4.4.20\build_win32</bsddb44Dir>
     <bsddb44DepLibs />
-    <sqlite3Dir>$(externalsDir)\sqlite-3.6.21</sqlite3Dir>
+    <sqlite3Dir>$(externalsDir)\sqlite-amalgamation-3071700</sqlite3Dir>
     <bz2Dir>$(externalsDir)\bzip2-1.0.6</bz2Dir>
     <opensslDir>$(externalsDir)\openssl-1.0.1e</opensslDir>
     <tcltkDir>$(externalsDir)\tcltk</tcltkDir>
