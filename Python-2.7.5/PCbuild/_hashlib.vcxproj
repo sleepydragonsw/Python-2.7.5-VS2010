@@ -150,6 +150,11 @@
     <CodeAnalysisRuleAssemblies Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)"
+"$(PythonExe)" build_ssl.py Release $(Platform) -a
+</Command>
+    </PreBuildEvent>
     <ClCompile>
       <AdditionalIncludeDirectories>$(opensslDir)\inc32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -162,6 +167,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)"
+"$(PythonExe)" build_ssl.py Release $(Platform) -a
+</Command>
+    </PreBuildEvent>
     <Midl>
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
@@ -177,6 +187,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)"
+"$(PythonExe)" build_ssl.py Release $(Platform) -a
+</Command>
+    </PreBuildEvent>
     <ClCompile>
       <AdditionalIncludeDirectories>$(opensslDir)\inc32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -189,6 +204,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)"
+"$(PythonExe)" build_ssl.py Release $(Platform) -a
+</Command>
+    </PreBuildEvent>
     <Midl>
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
@@ -204,6 +224,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PGInstrument|Win32'">
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)"
+"$(PythonExe)" build_ssl.py Release $(Platform) -a
+</Command>
+    </PreBuildEvent>
     <ClCompile>
       <AdditionalIncludeDirectories>$(opensslDir)\inc32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -216,6 +241,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PGInstrument|x64'">
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)"
+"$(PythonExe)" build_ssl.py Release $(Platform) -a
+</Command>
+    </PreBuildEvent>
     <Midl>
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
@@ -232,6 +262,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PGUpdate|Win32'">
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)"
+"$(PythonExe)" build_ssl.py Release $(Platform) -a
+</Command>
+    </PreBuildEvent>
     <ClCompile>
       <AdditionalIncludeDirectories>$(opensslDir)\inc32;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
@@ -244,6 +279,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='PGUpdate|x64'">
+    <PreBuildEvent>
+      <Command>cd "$(SolutionDir)"
+"$(PythonExe)" build_ssl.py Release $(Platform) -a
+</Command>
+    </PreBuildEvent>
     <Midl>
       <TargetEnvironment>X64</TargetEnvironment>
     </Midl>
