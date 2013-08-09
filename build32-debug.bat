@@ -14,7 +14,7 @@ cd openssl-1.0.1e
 if %ERRORLEVEL% NEQ 0 exit /b 1
 perl Configure --openssldir=D:\NotBackedUp\support\openssl-1.0.0e\ enable-camellia disable-idea VC-WIN32
 if %ERRORLEVEL% NEQ 0 exit /b 1
-call ms\do_ms.bat # possibly .\ms\do_nasm.bat with http://nasm.sf.net
+call ms\do_ms.bat
 if %ERRORLEVEL% NEQ 0 exit /b 1
 nmake -f ms\nt.mak
 if %ERRORLEVEL% NEQ 0 exit /b 1
