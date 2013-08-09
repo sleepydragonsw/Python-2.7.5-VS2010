@@ -2212,15 +2212,15 @@ def convert_data_files(files):
         if file.find("*") >= 0:
             flist = FileList()
             flist.findall(os.path.dirname(file))
-            flist.include_pattern(os.path.basename(file))
+            flist.include_pattern(os.path.basename(file), anchor=False)
             # We never want CVS
-            flist.exclude_pattern(re.compile(".*\\\\CVS\\\\"), is_regex=1)
-            flist.exclude_pattern("*.pyc")
-            flist.exclude_pattern("*.pyo")
+            flist.exclude_pattern(re.compile(".*\\\\CVS\\\\"), is_regex=1, anchor=False)
+            flist.exclude_pattern("*.pyc", anchor=False)
+            flist.exclude_pattern("*.pyo", anchor=False)
             # files with a leading dot upset bdist_msi, and '.*' doesn't
             # work - it matches from the start of the string and we have
             # dir names.  So any '\.' gets the boot.
-            flist.exclude_pattern(re.compile(".*\\\\\."), is_regex=1)
+            flist.exclude_pattern(re.compile(".*\\\\\."), is_regex=1, anchor=False)
             if not flist.files:
                 raise RuntimeError("No files match '%s'" % file)
             files_use = flist.files
