@@ -29,3 +29,8 @@
 /openssl-1.0.1e/ms/version32.rc
 /openssl-1.0.1e/tmp32/
 /openssl-1.0.1e/tmp32dll/
+
+/tcl8.5.14/win/Debug_VC10/
+/tcl8.5.14/win/nmakehlp.obj
+/tcl8.5.14/win/versions.vc
+/tcltk/
