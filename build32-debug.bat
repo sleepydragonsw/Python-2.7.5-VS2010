@@ -1,19 +1,10 @@
 @REM Compile 32-bit Python from source
 
-@REM Ensure that we are running from a Visual Studio command prompt
-if "%VCINSTALLDIR%" == "" goto NotInVisualStudioCommandPrompt
-
-@REM Ensure that we are running from a 32-bit Visual Studio command prompt
-if not "%Platform%" == "" goto NotIn32BitVisualStudioCommandPrompt
-
-@REM Ensure that perl.exe is available; it is needed to compile OpenSSL
-perl -v >NUL
-@if %ERRORLEVEL% NEQ 0 goto NoPerl
-
-@REM Ensure that nasm.exe is available; version 2.10.1 is required
-@REM See http://bugs.python.org/issue15172 for details
-nasm -h >NUL
-@if %ERRORLEVEL% NEQ 0 goto NoNasm
+@REM Verify a valid build environment
+call %~dp0scripts\verify_build_env.bat
+@if %ERRORLEVEL% NEQ 0 goto BuildFailed
+call %~dp0scripts\verify_build_env_32bit.bat
+@if %ERRORLEVEL% NEQ 0 goto BuildFailed
 
 @REM Compile TCL
 cd tcl8.5.14\win
@@ -45,37 +36,6 @@ python_d -c "print('If you see this line then compilation succeeded')"
 cd ..\..
 
 goto done
-
-:NotInVisualStudioCommandPrompt
-@echo off
-echo.
-echo ERROR: Not running from a 32-bit Visual Studio command prompt. >&2
-echo Try selecting "Visual Studio Command Prompt (2010)" from the >&2
-echo Start menu and running this command from the resulting command prompt >&2
-goto BuildFailed
-
-:NotIn32BitVisualStudioCommandPrompt
-@echo off
-echo.
-echo ERROR: Running from a 64-bit Visual Studio command prompt, but 32-bit required. >&2
-echo Try selecting "Visual Studio Command Prompt (2010)" from the >&2
-echo Start menu and running this command from the resulting command prompt >&2
-goto BuildFailed
-
-:NoPerl
-@echo off
-echo.
-echo ERROR: perl.exe is required in order to compile OpenSSL. >&2
-echo Try installing ActivePerl (eg. ActivePerl-5.16.3.1603-MSWin32-x86) >&2
-goto BuildFailed
-
-:NoNasm
-@echo off
-echo.
-echo ERROR: nasm.exe is required in order to compile OpenSSL. >&2
-echo Version 2.10.1 or greater is required >&2
-echo Try installing Nasm from http://www.nasm.us/pub/nasm/releasebuilds/2.10.09/win32 >&2
-goto BuildFailed
 
 :BuildFailed
 @echo off
