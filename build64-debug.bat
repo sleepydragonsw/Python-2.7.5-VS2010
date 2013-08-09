@@ -9,19 +9,6 @@ if %ERRORLEVEL% NEQ 0 goto NoPerl
 nasm -h >NUL
 if %ERRORLEVEL% NEQ 0 goto NoNasm
 
-@REM Compile OpenSSL
-cd openssl-1.0.1e
-if %ERRORLEVEL% NEQ 0 exit /b 1
-perl Configure --openssldir=D:\NotBackedUp\support\openssl-1.0.0e\ enable-camellia disable-idea VC-WIN64A
-if %ERRORLEVEL% NEQ 0 exit /b 1
-call ms\do_win64a.bat
-if %ERRORLEVEL% NEQ 0 exit /b 1
-nmake -f ms\nt.mak
-if %ERRORLEVEL% NEQ 0 exit /b 1
-nmake -f ms\ntdll.mak
-if %ERRORLEVEL% NEQ 0 exit /b 1
-cd ..
-
 @REM Compile TCL
 cd tcl8.5.14\win
 if %ERRORLEVEL% NEQ 0 exit /b 1
