@@ -24,7 +24,7 @@ from __future__ import with_statement, print_function
 # python.exe build_ssl.py Release x64
 # python.exe build_ssl.py Release Win32
 
-import os, sys, re, shutil, subprocess
+import argparse, os, sys, re, shutil, subprocess
 
 def run_command(args, fail_on_non_zero_exit_code=True):
     args_str = subprocess.list2cmdline(args)
@@ -143,21 +143,19 @@ def run_configure(configure, do_script):
     run_command([do_script])
 
 def main():
-    build_all = "-a" in sys.argv
-    if sys.argv[1] == "Release":
-        debug = False
-    elif sys.argv[1] == "Debug":
-        debug = True
-    else:
-        raise ValueError(str(sys.argv))
+    arg_parser = argparse.ArgumentParser()
+    arg_parser.add_argument("target", choices=("Win32", "x64"))
+    arg_parser.add_argument("-a", "--build-all", action="store_true", default=False)
+    parsed_args = arg_parser.parse_args()
+    build_all = parsed_args.build_all
 
-    if sys.argv[2] == "Win32":
+    if parsed_args.target == "Win32":
         arch = "x86"
         configure = "VC-WIN32"
         do_script = "ms\\do_nasm.bat"
         makefile="ms\\nt.mak"
         m32 = makefile
-    elif sys.argv[2] == "x64":
+    elif parsed_args.target == "x64":
         arch="amd64"
         configure = "VC-WIN64A"
         do_script = "ms\\do_win64a.bat"
@@ -165,7 +163,7 @@ def main():
         m32 = makefile.replace('64', '')
         #os.environ["VSEXTCOMP_USECL"] = "MS_OPTERON"
     else:
-        raise ValueError(str(sys.argv))
+        raise AssertionError("invalid target: {!r}".format(parsed_args.target))
 
     make_flags = ""
     if build_all:
@@ -206,12 +204,6 @@ def main():
                                           os.pathsep + \
                                           os.environ["PATH"]
             run_configure(configure, do_script)
-            if debug:
-                print("OpenSSL debug builds aren't supported.")
-            #if arch=="x86" and debug:
-            #    # the do_masm script in openssl doesn't generate a debug
-            #    # build makefile so we generate it here:
-            #    os.system("perl util\mk1mf.pl debug "+configure+" >"+makefile)
 
             if arch == "amd64":
                 create_makefile64(makefile, m32)
