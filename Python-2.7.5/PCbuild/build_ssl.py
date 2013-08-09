@@ -24,7 +24,29 @@ from __future__ import with_statement, print_function
 # python.exe build_ssl.py Release x64
 # python.exe build_ssl.py Release Win32
 
-import os, sys, re, shutil
+import os, sys, re, shutil, subprocess
+
+def run_command(args, fail_on_non_zero_exit_code=True):
+    args_str = subprocess.list2cmdline(args)
+    print("Starting command: {}".format(args_str))
+    try:
+        process = subprocess.Popen(args)
+    except OSError as e:
+        print("ERROR: unable to start process: {} ({})".format(args[0], e.strerror))
+        sys.exit(1)
+    else:
+        rc = process.wait()
+        if fail_on_non_zero_exit_code:
+            if rc == 0:
+                print("{} command completed successfully".format(args[0]))
+            else:
+                print("ERROR: command completed with non-zero exit code {}: {}"
+                    .format(rc, args_str))
+                sys.exit(1)
+        else:
+            print("{} command completed with exit code: {}".format(args[0], rc))
+
+    return rc
 
 # Find all "foo.exe" files on the PATH.
 def find_all_on_path(filename, extras = None):
@@ -47,12 +69,12 @@ def find_all_on_path(filename, extras = None):
 # is available.
 def find_working_perl(perls):
     for perl in perls:
-        fh = os.popen('"%s" -e "use Win32;"' % perl)
-        fh.read()
-        rc = fh.close()
-        if rc:
-            continue
-        return perl
+        print("Testing Perl from {} for ability to build OpenSSL".format(perl))
+        args = [perl, "-e", "use Win32;"]
+        rc = run_command(args, fail_on_non_zero_exit_code=False)
+        if rc == 0:
+            print("Using Perl: {}".format(perl))
+            return perl
     print("Can not find a suitable PERL:")
     if perls:
         print(" the following perl interpreters were found:")
@@ -112,21 +134,13 @@ def fix_makefile(makefile):
                 line = "CP=copy\n"
             if line.startswith("MKDIR="):
                 line = "MKDIR=mkdir\n"
-            if line.startswith("CFLAG="):
-                line = line.strip()
-                for algo in ("RC5", "MDC2", "IDEA"):
-                    noalgo = " -DOPENSSL_NO_%s" % algo
-                    if noalgo not in line:
-                        line = line + noalgo
-                line = line + '\n'
             fout.write(line)
     fout.close()
 
 def run_configure(configure, do_script):
-    print("perl Configure "+configure)
-    os.system("perl Configure "+configure)
-    print(do_script)
-    os.system(do_script)
+    configure_args = ["perl", "Configure", "enable-camellia", "disable-idea", configure]
+    run_command(configure_args)
+    run_command([do_script])
 
 def main():
     build_all = "-a" in sys.argv
@@ -140,13 +154,13 @@ def main():
     if sys.argv[2] == "Win32":
         arch = "x86"
         configure = "VC-WIN32"
-        do_script = "ms\\do_nasm"
+        do_script = "ms\\do_nasm.bat"
         makefile="ms\\nt.mak"
         m32 = makefile
     elif sys.argv[2] == "x64":
         arch="amd64"
         configure = "VC-WIN64A"
-        do_script = "ms\\do_win64a"
+        do_script = "ms\\do_win64a.bat"
         makefile = "ms\\nt64.mak"
         m32 = makefile.replace('64', '')
         #os.environ["VSEXTCOMP_USECL"] = "MS_OPTERON"
@@ -207,26 +221,17 @@ def main():
 
         # Now run make.
         if arch == "amd64":
-            rc = os.system(r"ml64 -c -Foms\uptable.obj ms\uptable.asm")
-            if rc:
-                print("ml64 assembler has failed.")
-                sys.exit(rc)
+            run_command(["ml64", "-c", "-Foms\\uptable.obj", "ms\\uptable.asm"])
 
         shutil.copy(r"crypto\buildinf_%s.h" % arch, r"crypto\buildinf.h")
         shutil.copy(r"crypto\opensslconf_%s.h" % arch, r"crypto\opensslconf.h")
 
         #makeCommand = "nmake /nologo PERL=\"%s\" -f \"%s\"" %(perl, makefile)
-        makeCommand = "nmake /nologo -f \"%s\"" % makefile
-        print("Executing ssl makefiles:", makeCommand)
         sys.stdout.flush()
-        rc = os.system(makeCommand)
-        if rc:
-            print("Executing "+makefile+" failed")
-            print(rc)
-            sys.exit(rc)
+        makeArgs = ["nmake", "/nologo", "-f", makefile]
+        run_command(makeArgs)
     finally:
         os.chdir(old_cd)
-    sys.exit(rc)
 
 if __name__=='__main__':
     main()
