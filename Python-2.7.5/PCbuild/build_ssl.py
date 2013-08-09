@@ -212,9 +212,6 @@ def main():
             shutil.copy(r"crypto\opensslconf.h", r"crypto\opensslconf_%s.h" % arch)
 
         # Now run make.
-        if arch == "amd64":
-            run_command(["ml64", "-c", "-Foms\\uptable.obj", "ms\\uptable.asm"])
-
         shutil.copy(r"crypto\buildinf_%s.h" % arch, r"crypto\buildinf.h")
         shutil.copy(r"crypto\opensslconf_%s.h" % arch, r"crypto\opensslconf.h")
 
