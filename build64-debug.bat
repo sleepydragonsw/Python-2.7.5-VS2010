@@ -34,7 +34,7 @@ cd Python-2.7.5\PCbuild
 @if %ERRORLEVEL% NEQ 0 goto BuildFailed
 msbuild pcbuild.sln  /p:Configuration="Debug" /p:Platform="x64"
 @if %ERRORLEVEL% NEQ 0 goto BuildFailed
-python_d -c "print("""Build Successful!""")"
+amd64\python_d -c "print('If you see this line then compilation succeeded')"
 @if %ERRORLEVEL% NEQ 0 goto BuildFailed
 cd ..\..
 
@@ -65,4 +65,4 @@ exit /b 1
 @echo off
 echo.
 echo Python Successfully Built
-echo Try your newly-compiled Python interpreter by running: Python-2.7.5\PCbuild\python_d.exe
+echo Try your newly-compiled Python interpreter by running: Python-2.7.5\PCbuild\amd64\python_d.exe
