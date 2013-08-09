@@ -978,6 +978,7 @@ class my_build_ext(build_ext):
             if self.debug:
                 largs.append("/DEBUG")
             temp_manifest = os.path.join(build_temp, os.path.basename(dll) + ".manifest")
+            largs.append('/MANIFEST')
             largs.append('/MANIFESTFILE:' + temp_manifest)
             largs.append('/PDB:None')
             largs.append("/OUT:" + dll)
@@ -1077,13 +1078,13 @@ class my_build_ext(build_ext):
                     plat_dir = "x86"
                 # Find the redist directory.
                 vckey = _winreg.OpenKey(_winreg.HKEY_LOCAL_MACHINE,
-                                        r"SOFTWARE\Microsoft\VisualStudio\9.0\Setup\VC",
+                                        r"SOFTWARE\Microsoft\VisualStudio\10.0\Setup\VC",
                                         0, access)
                 val, val_typ = _winreg.QueryValueEx(vckey, "ProductDir")
-                mfc_dir = os.path.join(val, "redist", plat_dir, "Microsoft.VC90.MFC")
+                mfc_dir = os.path.join(val, "redist", plat_dir, "Microsoft.VC100.MFC")
                 if not os.path.isdir(mfc_dir):
                     raise RuntimeError("Can't find the redist dir at %r" % (mfc_dir))
-                files = "mfc90.dll mfc90u.dll mfcm90.dll mfcm90u.dll Microsoft.VC90.MFC.manifest".split()
+                files = "mfc100.dll mfc100u.dll mfcm100.dll mfcm100u.dll".split()
                 for f in files:
                     self.copy_file(
                             os.path.join(mfc_dir, f), target_dir)
