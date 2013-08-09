@@ -53,3 +53,8 @@
 /tcl8.5.14/win/Debug_AMD64_VC10/
 /tcltk64/
 /tk8.5.14/win/Debug_AMD64_VC10/
+
+/Python-2.7.5/PC/python_nt.h
+/Python-2.7.5/PC/pythonnt_rc.h
+/tcl8.5.14/win/Release_VC10/
+/tk8.5.14/win/Release_VC10/
