@@ -465,7 +465,7 @@ STUB_CFLAGS     = $(cflags) $(cdebug) $(OPTDEFINES)
 #---------------------------------------------------------------------
 
 !if $(DEBUG)
-ldebug	= -debug -debugtype:cv
+ldebug	= -debugtype:cv
 !else
 ldebug	= -release -opt:ref -opt:icf,3
 !if $(SYMBOLS)
