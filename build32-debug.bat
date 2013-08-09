@@ -4,6 +4,11 @@
 perl -v >NUL
 if %ERRORLEVEL% NEQ 0 goto NoPerl
 
+@REM Ensure that nasm.exe is available; version 2.10.1 is required
+@REM See http://bugs.python.org/issue15172 for details
+nasm -h >NUL
+if %ERRORLEVEL% NEQ 0 goto NoNasm
+
 @REM Compile OpenSSL
 cd openssl-1.0.1e
 if %ERRORLEVEL% NEQ 0 exit /b 1
@@ -52,6 +57,12 @@ goto done
 :NoPerl
 echo perl.exe is required in order to compile OpenSSL
 echo Try installing ActivePerl (eg. ActivePerl-5.16.3.1603-MSWin32-x86)
+exit /b 1
+
+:NoNasm
+echo nasm.exe is required in order to compile OpenSSL
+echo Version 2.10.1 or greater is required
+echo Try installing Nasm from http://www.nasm.us/pub/nasm/releasebuilds/2.10.09/win32
 exit /b 1
 
 :done
