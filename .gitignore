@@ -40,3 +40,16 @@
 /tk8.5.14/win/Debug_VC10/
 /tk8.5.14/win/nmakehlp.obj
 /tk8.5.14/win/versions.vc
+
+/Python-2.7.5/PCbuild/amd64/
+/Python-2.7.5/PCbuild/x64-temp-Debug/
+/openssl-1.0.1e/crypto/buildinf_amd64.h
+/openssl-1.0.1e/crypto/opensslconf_amd64.h
+/openssl-1.0.1e/inc64/
+/openssl-1.0.1e/ms/nt64.mak
+/openssl-1.0.1e/ms/uptable.asm
+/openssl-1.0.1e/ms/uptable.obj
+/openssl-1.0.1e/tmp64/
+/tcl8.5.14/win/Debug_AMD64_VC10/
+/tcltk64/
+/tk8.5.14/win/Debug_AMD64_VC10/
