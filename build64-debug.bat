@@ -30,6 +30,8 @@ nmake -f makefile.vc COMPILERFLAGS=-DWINVER=0x0500 OPTS=noxp DEBUG=1 MACHINE=AMD
 cd ..\..
 
 @REM Compile Python
+@REM For 64-bit builds, need to set HOST_PYTHON as a workaround for the way that VS invokes build_ssl.py
+set HOST_PYTHON=%~dp0Python-2.7.5\PCbuild\amd64\python_d.exe
 cd Python-2.7.5\PCbuild
 @if %ERRORLEVEL% NEQ 0 goto BuildFailed
 msbuild pcbuild.sln  /p:Configuration="Debug" /p:Platform="x64"
