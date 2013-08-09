@@ -4,7 +4,7 @@
     <PyDllName>python27</PyDllName>
     <PythonExe>$(SolutionDir)\python.exe</PythonExe>
     <externalsDir>..\..</externalsDir>
-    <bsddb47Dir>$(externalsDir)\db-4.7.25.0\build_windows</bsddb47Dir>
+    <bsddb47Dir>$(externalsDir)\db-4.7.25\build_windows</bsddb47Dir>
     <bsddb47DepLibs>ws2_32.lib</bsddb47DepLibs>
     <bsddbDir>$(bsddb47Dir)</bsddbDir>
     <bsddbDepLibs>$(bsddb47DepLibs)</bsddbDepLibs>
