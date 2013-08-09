@@ -34,3 +34,6 @@
 /tcl8.5.14/win/nmakehlp.obj
 /tcl8.5.14/win/versions.vc
 /tcltk/
+/tk8.5.14/win/Debug_VC10/
+/tk8.5.14/win/nmakehlp.obj
+/tk8.5.14/win/versions.vc
